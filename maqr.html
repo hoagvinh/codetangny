@@ -1,0 +1,269 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Đổi link sang mã QR</title>
+
+    <!-- Thư viện QRCode -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #f9a8d4, #bfdbfe);
+            padding: 16px;
+        }
+
+        .container {
+            background: #ffffff;
+            max-width: 480px;
+            width: 100%;
+            padding: 20px 22px 24px;
+            border-radius: 18px;
+            box-shadow: 0 15px 45px rgba(15, 23, 42, 0.2);
+        }
+
+        .title {
+            font-size: 1.4rem;
+            font-weight: 650;
+            text-align: center;
+            margin-bottom: 4px;
+        }
+
+        .subtitle {
+            font-size: 0.9rem;
+            text-align: center;
+            color: #6b7280;
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            font-size: 0.9rem;
+            margin-bottom: 6px;
+            font-weight: 600;
+            color: #374151;
+        }
+
+        .input-group {
+            display: flex;
+            gap: 8px;
+        }
+
+        input[type="text"] {
+            flex: 1;
+            padding: 10px 12px;
+            border-radius: 10px;
+            border: 1px solid #d1d5db;
+            font-size: 0.95rem;
+            outline: none;
+            transition: border 0.15s ease, box-shadow 0.15s ease;
+        }
+
+        input[type="text"]:focus {
+            border-color: #6366f1;
+            box-shadow: 0 0 0 3px rgba(129, 140, 248, 0.35);
+        }
+
+        button {
+            padding: 10px 14px;
+            border-radius: 10px;
+            border: none;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            white-space: nowrap;
+            color: #fff;
+            transition: transform 0.1s ease, box-shadow 0.1s ease;
+        }
+
+        button:active {
+            transform: scale(0.97);
+            box-shadow: 0 5px 15px rgba(15, 23, 42, 0.2) inset;
+        }
+
+        .btn-generate {
+            background: linear-gradient(135deg, #6366f1, #ec4899);
+        }
+
+        .btn-clear {
+            background: linear-gradient(135deg, #f87171, #f43f5e);
+        }
+
+        .btn-download {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: #fff;
+            padding: 10px 14px;
+            border-radius: 10px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.1s ease;
+        }
+
+        .btn-download:active {
+            transform: scale(0.97);
+        }
+
+        .qr-section {
+            margin-top: 20px;
+            padding-top: 16px;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .qr-wrapper {
+            display: flex;
+            justify-content: center;
+            margin: 14px 0 8px;
+        }
+
+        #qrcode {
+            padding: 8px;
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(15, 23, 42, 0.18);
+        }
+
+        .help-text {
+            font-size: 0.8rem;
+            text-align: center;
+            color: #6b7280;
+            line-height: 1.4;
+        }
+
+        .result-link {
+            font-size: 0.8rem;
+            margin-top: 6px;
+            text-align: center;
+            color: #4b5563;
+            word-break: break-all;
+        }
+
+        .result-link a {
+            color: #2563eb;
+            text-decoration: none;
+        }
+
+        .result-link a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 18px 16px 20px;
+            }
+
+            .input-group {
+                flex-direction: column;
+            }
+
+            button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="title">Đổi link sang mã QR</div>
+        <div class="subtitle">Nhập link → tạo mã QR → quét là mở ngay 🎯</div>
+
+        <label for="urlInput">Nhập link (URL):</label>
+        <div class="input-group">
+            <input id="urlInput" type="text" placeholder="Ví dụ: https://www.facebook.com">
+            <button class="btn-generate" onclick="generateQR()">Tạo mã QR</button>
+            <button class="btn-clear" onclick="clearAll()">Xóa</button>
+        </div>
+
+        <div class="qr-section" id="qrSection" style="display: none;">
+            <div class="qr-wrapper">
+                <div id="qrcode"></div>
+            </div>
+
+            <div style="text-align: center; margin-bottom: 10px;">
+                <button class="btn-download" onclick="downloadQR()">Tải mã QR về máy</button>
+            </div>
+
+            <p class="help-text">Dùng camera điện thoại hoặc app quét QR để mở link.</p>
+            <p class="result-link">
+                Link: <a href="#" id="resultLink" target="_blank" rel="noopener noreferrer"></a>
+            </p>
+        </div>
+    </div>
+
+    <script>
+        let qrCodeInstance = null;
+
+        function generateQR() {
+            const input = document.getElementById("urlInput");
+            let url = input.value.trim();
+
+            if (!url) {
+                alert("Vui lòng nhập link trước!");
+                input.focus();
+                return;
+            }
+
+            // Tự thêm https nếu thiếu
+            if (!/^https?:\/\//i.test(url)) {
+                url = "https://" + url;
+            }
+
+            const qrContainer = document.getElementById("qrcode");
+            const qrSection = document.getElementById("qrSection");
+            const resultLinkEl = document.getElementById("resultLink");
+
+            // Xóa QR cũ
+            qrContainer.innerHTML = "";
+
+            // Tạo QR mới
+            qrCodeInstance = new QRCode(qrContainer, {
+                text: url,
+                width: 240,
+                height: 240,
+                correctLevel: QRCode.CorrectLevel.H
+            });
+
+            qrSection.style.display = "block";
+            resultLinkEl.textContent = url;
+            resultLinkEl.href = url;
+        }
+
+        // Xóa tất cả
+        function clearAll() {
+            document.getElementById("urlInput").value = "";
+            document.getElementById("qrcode").innerHTML = "";
+            document.getElementById("qrSection").style.display = "none";
+        }
+
+        // Tải mã QR về máy
+        function downloadQR() {
+            const qrImg = document.querySelector("#qrcode img");
+            if (!qrImg) {
+                alert("Chưa có mã QR để tải!");
+                return;
+            }
+            const link = document.createElement("a");
+            link.href = qrImg.src;
+            link.download = "ma_qr.png";
+            link.click();
+        }
+
+        // Enter cũng tạo QR
+        document.getElementById("urlInput").addEventListener("keydown", function (e) {
+            if (e.key === "Enter") generateQR();
+        });
+    </script>
+</body>
+</html>

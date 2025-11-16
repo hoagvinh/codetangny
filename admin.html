@@ -1,0 +1,192 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin - Quản lý chat</title>
+  <script src="/socket.io/socket.io.js"></script>
+  <style>
+    body {
+      font-family: Arial;
+      margin: 0;
+      display: flex;
+      height: 100vh;
+      overflow: hidden;
+    }
+    #sidebar {
+      width: 25%;
+      border-right: 1px solid #ccc;
+      background: #f8f9fa;
+      overflow-y: auto;
+    }
+    #sidebar h3 {
+      text-align: center;
+      background: #ff6fae;
+      color: white;
+      padding: 10px;
+      margin: 0;
+    }
+    .user-item {
+      padding: 10px;
+      cursor: pointer;
+      border-bottom: 1px solid #eee;
+    }
+    .user-item:hover {
+      background: #ffe4ec;
+    }
+    .active {
+      background: #ffb6c1 !important;
+      color: white;
+    }
+    #chatbox {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    #messages {
+      flex: 1;
+      padding: 10px;
+      overflow-y: auto;
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+    }
+    .msg {
+      margin: 5px 0;
+      padding: 6px 10px;
+      border-radius: 10px;
+      max-width: 70%;
+      word-wrap: break-word;
+    }
+    .user {
+      background: #e6f0ff;
+      align-self: flex-start;
+    }
+    .admin {
+      background: #ffb6c1;
+      color: white;
+      align-self: flex-end;
+      text-align: right;
+    }
+    #inputArea {
+      display: flex;
+      border-top: 1px solid #ddd;
+    }
+    #msg {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      outline: none;
+    }
+    #send {
+      padding: 10px 20px;
+      background: #ff6fae;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    #send:hover {
+      background: #ff3e80;
+    }
+  </style>
+</head>
+<body>
+  <div id="sidebar">
+    <h3>Khách hàng</h3>
+    <div id="userList"></div>
+  </div>
+
+  <div id="chatbox">
+    <div id="messages"></div>
+    <div id="inputArea">
+      <input id="msg" placeholder="Nhập tin nhắn..." autocomplete="off" />
+      <button id="send">Gửi</button>
+    </div>
+  </div>
+
+  <script>
+    const token = localStorage.getItem("adminToken");
+    if (!token) window.location.href = "/admin-login";
+
+    const socket = io({ query: { adminToken: token } });
+
+    socket.on("unauthorized", (msg) => {
+      alert(msg || "Phiên đăng nhập hết hạn. Đăng nhập lại!");
+      localStorage.removeItem("adminToken");
+      window.location.href = "/admin-login";
+    });
+
+    const userListDiv = document.getElementById("userList");
+    const messagesDiv = document.getElementById("messages");
+    const msgInput = document.getElementById("msg");
+    const sendBtn = document.getElementById("send");
+
+    let currentUser = null;
+    const chats = {};
+
+    socket.emit("joinAdmin");
+
+    socket.on("chatHistory", (msgs) => {
+      msgs.forEach((m) => {
+        if (!chats[m.id]) chats[m.id] = [];
+        chats[m.id].push(m);
+      });
+    });
+
+    socket.on("newUser", (user) => {
+      if (!document.getElementById(user.id)) {
+        const div = document.createElement("div");
+        div.id = user.id;
+        div.className = "user-item";
+        div.textContent = `${user.name} (${user.phone})`;
+        div.onclick = () => openChat(user.id);
+        userListDiv.appendChild(div);
+        chats[user.id] = [];
+      }
+    });
+
+    // Nhận tin nhắn từ khách
+    socket.on("chatMessage", (m) => {
+      if (!chats[m.id]) chats[m.id] = [];
+      chats[m.id].push(m);
+
+      // 🔧 Nếu admin chưa chọn user nào, tự động mở user mới nhất
+      if (!currentUser) openChat(m.id);
+
+      // 🔧 Nếu đang xem đúng user đó, hiển thị tin nhắn ngay
+      if (currentUser === m.id) renderMessages(m.id);
+    });
+
+    function openChat(id) {
+      currentUser = id;
+      document.querySelectorAll(".user-item").forEach((el) => el.classList.remove("active"));
+      document.getElementById(id).classList.add("active");
+      renderMessages(id);
+    }
+
+    function renderMessages(userId) {
+      messagesDiv.innerHTML = "";
+      (chats[userId] || []).forEach((m) => {
+        const div = document.createElement("div");
+        div.className = "msg " + (m.sender === "admin" ? "admin" : "user");
+        div.innerHTML = `<b>${m.sender === "admin" ? "Admin" : m.name}:</b> ${m.msg}`;
+        messagesDiv.appendChild(div);
+      });
+      messagesDiv.scrollTop = messagesDiv.scrollHeight;
+    }
+
+    sendBtn.onclick = sendMsg;
+    msgInput.addEventListener("keypress", (e) => {
+      if (e.key === "Enter") sendMsg();
+    });
+
+    function sendMsg() {
+      const msg = msgInput.value.trim();
+      if (!msg || !currentUser) return;
+      socket.emit("adminMessage", { to: currentUser, msg });
+      chats[currentUser].push({ sender: "admin", msg });
+      renderMessages(currentUser);
+      msgInput.value = "";
+    }
+  </script>
+</body>
+</html>

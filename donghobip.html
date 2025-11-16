@@ -1,0 +1,225 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Random Number</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #fce4ec, #e3f2fd);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .card {
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            max-width: 400px;
+            width: 90%;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 20px;
+            margin-top: 0;
+        }
+
+        .range-inputs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .range-inputs div {
+            flex: 1;
+        }
+
+        label {
+            font-size: 13px;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 6px 8px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 10px;
+            margin: 10px 0 15px;
+        }
+
+        button {
+            flex: 1;
+            padding: 10px;
+            border-radius: 999px;
+            border: none;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        #btnGenerate {
+            background: #42a5f5;
+            color: white;
+        }
+
+        #btnReset {
+            background: #eeeeee;
+        }
+
+        .current-number {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .current-number span {
+            display: block;
+        }
+
+        #currentValue {
+            font-size: 40px;
+            font-weight: 700;
+            color: #e91e63;
+            margin-top: 5px;
+        }
+
+        .info {
+            font-size: 13px;
+            margin-bottom: 8px;
+        }
+
+        .history {
+            font-size: 13px;
+            padding: 8px;
+            background: #f5f5f5;
+            border-radius: 8px;
+            max-height: 150px;
+            overflow-y: auto;
+        }
+
+        .note {
+            font-size: 12px;
+            color: #666;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+<div class="card">
+    <h1>Chọn số ngẫu nhiên</h1>
+
+    <div class="range-inputs">
+        <div>
+            <label for="minValue">Số nhỏ nhất</label>
+            <input type="number" id="minValue" value="1">
+        </div>
+        <div>
+            <label for="maxValue">Số lớn nhất</label>
+            <input type="number" id="maxValue" value="100">
+        </div>
+    </div>
+
+    <div class="buttons">
+        <button id="btnGenerate" onclick="generateNumber()">Quay số</button>
+        <button id="btnReset" onclick="resetGame()">Reset</button>
+    </div>
+
+    <div class="current-number">
+        <span>Số hiện tại:</span>
+        <span id="currentValue">-</span>
+    </div>
+
+    <div class="info">
+        Số lần bấm: <strong id="clickCount">0</strong><br>
+    </div>
+
+    <div class="history">
+        <strong>Lịch sử:</strong>
+        <span id="historyList"></span>
+    </div>
+</div>
+
+<script>
+    let clickCount = 0;           // Tổng số lần bấm
+    let duplicateNumber = null;   // Số sẽ bị trùng ở 2 lần bấm (vị trí 6 và 7 trong mỗi chu kỳ 7)
+
+    function randomInRange(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    function generateNumber() {
+        const minInput = document.getElementById('minValue');
+        const maxInput = document.getElementById('maxValue');
+        const min = parseInt(minInput.value, 10);
+        const max = parseInt(maxInput.value, 10);
+
+        if (isNaN(min) || isNaN(max) || min > max) {
+            alert('Vui lòng nhập khoảng số hợp lệ (số nhỏ nhất ≤ số lớn nhất).');
+            return;
+        }
+
+        clickCount++;
+
+        // Vị trí trong chu kỳ 7: 1..5 random bình thường, 6 và 7 là số trùng nhau
+        const positionInCycle = ((clickCount - 1) % 7) + 1;
+        let result;
+
+        if (positionInCycle <= 5) {
+            // 5 số đầu: random bình thường
+            duplicateNumber = null; // reset bất kỳ số trùng cũ nào
+            result = randomInRange(min, max);
+        } else {
+            // vị trí 6 hoặc 7: dùng số trùng
+            if (duplicateNumber === null) {
+                // Lần thứ 6 trong chu kỳ: tạo số trùng
+                duplicateNumber = randomInRange(min, max);
+            }
+            result = duplicateNumber;
+
+            // Sau lần 7 thì reset để sang chu kỳ mới
+            if (positionInCycle === 7) {
+                // Giữ duplicateNumber đến khi lần 7 dùng xong rồi mới xoá
+                setTimeout(() => {
+                    duplicateNumber = null;
+                }, 0);
+            }
+        }
+
+        // Hiển thị kết quả
+        document.getElementById('currentValue').textContent = result;
+        document.getElementById('clickCount').textContent = clickCount;
+
+        const historyList = document.getElementById('historyList');
+        if (historyList.textContent.trim() === '') {
+            historyList.textContent = result;
+        } else {
+            historyList.textContent += ', ' + result;
+        }
+    }
+
+    function resetGame() {
+        clickCount = 0;
+        duplicateNumber = null;
+        document.getElementById('clickCount').textContent = '0';
+        document.getElementById('currentValue').textContent = '-';
+        document.getElementById('historyList').textContent = '';
+    }
+</script>
+</body>
+</html>

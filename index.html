@@ -1,0 +1,367 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Code Tặng Người Yêu </title>
+
+<style>
+/* ===== RESET ===== */
+body {
+  margin: 0;
+  font-family: "Quicksand", sans-serif;
+  background: #0f0f0f;
+  color: #e4e6eb;
+}
+
+/* ===== HEADER ===== */
+header {
+  background: #000;
+  padding: 18px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.6);
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
+
+.logo {
+  font-size: 28px;
+  font-weight: bold;
+  color: #00bfff;
+}
+.logo-area {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo-img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+
+.logo-text {
+  font-size: 28px;
+  font-weight: bold;
+  color: #00bfff;
+}
+
+
+nav a {
+  margin-left: 25px;
+  text-decoration: none;
+  color: #fff;
+  font-weight: 600;
+}
+
+nav a:hover { color: #00bfff; }
+
+/* ===== BANNER ===== */
+.banner {
+  background: url('https://upload.wikimedia.org/wikipedia/en/a/ae/Love_TV_Logo.png') center/cover no-repeat;
+  height: 320px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.banner::after {
+  content:"";
+  position:absolute;
+  top:0;left:0;right:0;bottom:0;
+  background: rgba(0,0,0,0.45);
+}
+
+.banner h1 {
+  position:relative;
+  z-index:2;
+  font-family: "Pacifico", cursive;
+  color:#fff;
+  font-size:46px;
+  text-shadow:0 4px 10px rgba(0,0,0,0.6);
+}
+
+/* ===== SECTION TITLE ===== */
+.section-title {
+  text-align:center;
+  margin: 40px 0 20px;
+  font-size: 32px;
+  color: #00bfff;
+  text-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+/* ===== GRID BOX ===== */
+.grid-boxes {
+  max-width: 1200px;
+  margin: auto;
+  padding: 10px 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+  gap: 28px;
+}
+
+.box {
+  background: #1c1c1c;
+  border-radius: 14px;
+  padding: 18px;
+  text-align: center;
+  transition: 0.3s;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+}
+
+.box:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+}
+
+.box img {
+  width: 100%;
+  height: 190px;
+  border-radius: 12px;
+  object-fit: cover;
+  margin-bottom: 15px;
+}
+
+.box h2 {
+  margin: 10px 0;
+  font-size: 22px;
+  color: #00bfff;
+}
+
+.box p {
+  color: #c8c8c8;
+  font-size: 14px;
+}
+
+/* ===== BUTTON ===== */
+.btn {
+  padding: 10px 18px;
+  background: #006bff;
+  border: none;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.25s;
+}
+.btn:hover { background: #0052c7; }
+
+.btn-row {
+  display:flex;
+  gap:10px;
+  justify-content:center;
+  margin-top:10px;
+}
+
+/* ===== FOOTER ===== */
+footer {
+  background: #000;
+  color: #b9bbbe;
+  padding: 18px;
+  text-align:center;
+  margin-top: 50px;
+  border-top: 1px solid #333;
+}
+
+footer button {
+  background: none;
+  border: none;
+  color: #b9bbbe;
+  margin: 0 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+footer button:hover { color:#fff }
+
+/* ===== MODAL ===== */
+.overlay {
+  position: fixed; inset:0;
+  background: rgba(0,0,0,0.55);
+  backdrop-filter: blur(5px);
+  display:none;
+  justify-content:center;
+  align-items:center;
+}
+
+.modal {
+  background:#1f1f1f;
+  width:90%;
+  max-width:430px;
+  border-radius:12px;
+  padding:22px;
+  animation: zoomIn .25s ease;
+  color:#fff;
+  position:relative;
+}
+
+.close-btn {
+  position:absolute;
+  right:10px;
+  top:10px;
+  cursor:pointer;
+  font-size:20px;
+  color:#888;
+}
+
+@keyframes zoomIn {
+  from { transform: scale(0.85); opacity:0; }
+  to { transform: scale(1); opacity:1; }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo-area">
+    <img src="image/htv_logo.png" class="logo-img">
+    <span class="logo-text">Code Tặng Người Yêu</span>
+  </div>
+
+  <nav>
+    <a href="#">Trang chủ</a>
+    <a href="#" onclick="openModal('intro')">Giới thiệu</a>
+    <a href="#" onclick="openModal('contact')">Liên hệ</a>
+  </nav>
+</header>
+
+
+<div class="banner">
+  <h1>Tặng người bạn thương </h1>
+</div>
+
+<h2 class="section-title">Danh mục</h2>
+
+<section class="grid-boxes">
+
+  <!-- BOX 1 -->
+  <div class="box">
+    <img src="https://media.desenio.com/site_images/6859e3fdc307ab98cee8d92c_1509080004_7858-3.jpg">
+    <h2> Web tặng ny ngày lễ</h2>
+    <p>Dạng thiệp mở, nhạc tình cảm và ảnh.</p>
+
+    <div class="btn-row">
+      <button class="btn" onclick="location.href='mautangny.html'">Xem mẫu</button>
+      <button class="btn" onclick="downloadCodeNgayLe()">Tải Code</button>
+    </div>
+  </div>
+
+  <!-- BOX 2 -->
+  <div class="box">
+    <img src="image/traitim.png">
+    <h2> Trái tim vũ trụ</h2>
+    <p>Trái tim tình yêu lãng mạn, lung linh</p>
+    <div class="btn-row">
+    <button class="btn" onclick="location.href='traitimvutru.html'">Xem mẫu</button>
+    <button class="btn" onclick="window.open('https://github.com/DrGifter/Gift_HeartStar?tab=readme-ov-file', '_blank')">Web lấy code</button>
+    </div>
+  </div>
+
+  <!-- BOX 3 -->
+  <div class="box">
+    <img src="https://dimensions.edu.vn/upload/2025/08/meme-to-tinh-2.webp">
+    <h2> Web tỏ tình</h2>
+    <p>Giao diện lung linh, thư tỏ tình crush ngọt ngào.</p>
+    <div class="btn-row">
+    <button class="btn" onclick="location.href='totinh.html'">Xem mẫu</button>
+   <button class="btn" onclick="window.open('https://github.com/DrGifter/Gift_Letter', '_blank')">Web lấy code</button>
+    </div>
+  </div>
+  <!-- BOX 1 -->
+  <div class="box">
+    <img src="image/alalal.png">
+    <h2> Web tỏ tình 2</h2>
+    <p>Dạng thiệp mở.</p>
+
+    <div class="btn-row">
+      <button class="btn" onclick="location.href='totinh2.html'">Xem mẫu</button>
+      <button class="btn" onclick="window.open('https://github.com/QuangNhat2003/To-Tinh-Crush', '_blank')">Web lấy code</button>
+    </div>
+  </div>
+    <!-- BOX 6 -->
+  <div class="box">
+    <img src="https://dedicapag.com/en/images/net.gif">
+    <h2> Netflix- our love story</h2>
+    <p>Làm bộ phim netfilx về tình yêu của bạn</p>
+   <button class="btn" onclick="window.open('https://dedicapag.com/en/PagNetEn/create_message.php', '_blank')">Web tạo</button>
+  </div>
+
+      <!-- BOX 6 -->
+  <div class="box">
+    <img src="https://dedicapag.com/en/images/Galaxy.gif">
+    <h2> Galaxy of Love</h2>
+    <p>Vũ trụ tình yêu dành cho người thân của bạn</p>
+   <button class="btn" onclick="window.open('https://dedicapag.com/en/PagGalaxyEn/create_message.php', '_blank')">Web tạo</button>
+  </div>
+  
+  <!-- BOX 4 -->
+  <div class="box">
+    <img src="https://tse1.mm.bing.net/th/id/OIP.YsXYq6OWbtjxGlIHR__O5QHaE7?cb=ucfimg2ucfimg=1&rs=1&pid=ImgDetMain&o=7&rm=3">
+    <h2> QR Generator</h2>
+    <p>Tạo mã QR cho link trang web.</p>
+    <button class="btn" onclick="location.href='maqr.html'">Tạo QR</button>
+  </div>
+
+  <!-- BOX 5 -->
+  <div class="box">
+    <img src="https://tse3.mm.bing.net/th/id/OIP.YjJSBQVO5Cy9RBxwNqfj7AHaJ5?cb=ucfimg2ucfimg=1&rs=1&pid=ImgDetMain&o=7&rm=3">
+    <h2> Chọn số ngẫu nhiên</h2>
+    <p>Random số thú vị.</p>
+    <button class="btn" onclick="location.href='donghobip.html'">Chọn số</button>
+  </div>
+
+</section>
+
+<footer>
+  <button onclick="openModal('intro')">Giới thiệu</button>
+  <button onclick="openModal('info')">Thông tin</button>
+  <button onclick="openModal('contact')">Liên hệ</button>
+</footer>
+
+<!-- MODAL -->
+<div id="overlay" class="overlay">
+  <div class="modal">
+    <span class="close-btn" onclick="closeModal()">✖</span>
+    <div id="modalContent"></div>
+  </div>
+</div>
+
+<script>
+function openModal(type) {
+  let c = "";
+
+  if(type==="intro")
+    c = `<h2> Giới thiệu</h2>
+         <p>Trang web giúp bạn tạo ra những món quà tặng người yêu, người thân một cách đơn giản và đẹp mắt.</p>`;
+
+  if(type==="info")
+    c = `<h2> Thông tin</h2>
+         <p> Tác giả: missubbi<br> Công nghệ: HTML/CSS/JS</p>`;
+
+  if(type==="contact")
+    c = `<h2> Liên hệ</h2>
+         <p>Zalo: 0866 384 404<br>Email: hgvinh291205@gmail.com</p>`;
+
+  document.getElementById("modalContent").innerHTML = c;
+  document.getElementById("overlay").style.display = "flex";
+}
+
+function closeModal(){
+  document.getElementById("overlay").style.display = "none";
+}
+
+function downloadCodeNgayLe() {
+  const link = document.createElement("a");
+  link.href = "wordmautangny.docx"; 
+  link.download = "code_tang_nguoi_yeu.docx";
+  link.click();
+}
+</script>
+
+</body>
+</html>
