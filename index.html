@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
@@ -6,6 +6,21 @@
 <title>Code Tặng Người Yêu </title>
 
 <style>
+.mode-btn {
+  background: #222;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: 18px;
+  transition: 0.3s;
+  margin-left: 20px;
+}
+.mode-btn:hover {
+  transform: scale(1.1);
+}
+
 /* ===== RESET ===== */
 body {
   margin: 0;
@@ -212,6 +227,161 @@ footer button:hover { color:#fff }
   from { transform: scale(0.85); opacity:0; }
   to { transform: scale(1); opacity:1; }
 }
+
+/* ===== TÙY CHỈNH CHO MOBILE ===== */
+@media (max-width: 768px) {
+
+  header {
+    padding: 10px 16px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .logo {
+    font-size: 20px;
+    line-height: 1.2;
+  }
+
+  .logo img {
+    width: 28px;
+    margin-right: 6px;
+  }
+
+  nav {
+    margin-top: 6px;
+  }
+
+  nav a {
+    margin-left: 0;
+    margin-right: 16px;
+    font-size: 14px;
+  }
+
+  .banner {
+    height: 220px;
+  }
+
+  .banner h1 {
+    font-size: 26px;
+    padding: 0 16px;
+    text-align: center;
+  }
+
+  .section-title {
+    font-size: 24px;
+    margin: 24px 0 16px;
+  }
+
+  .grid-boxes {
+    padding: 0 10px 30px;
+    gap: 16px;
+  }
+
+  .box {
+    padding: 14px;
+  }
+
+  .box img {
+    height: 160px;
+  }
+
+  .box h2 {
+    font-size: 18px;
+  }
+
+  .box p {
+    font-size: 13px;
+  }
+
+  .btn {
+    padding: 8px 14px;
+    font-size: 13px;
+  }
+
+  .modal {
+    width: 92%;
+    max-width: 360px;
+    padding: 16px;
+  }
+
+  .modal h2 {
+    font-size: 18px;
+  }
+
+  .modal p {
+    font-size: 14px;
+  }
+
+  .close-btn {
+    font-size: 18px;
+  }
+}
+/* ======================== */
+/*       LIGHT MODE         */
+/* ======================== */
+
+.light-mode {
+  background: #ffffff !important;
+  color: #000000 !important;
+}
+
+.light-mode * {
+  color: #000000 !important;
+}
+
+/* Header */
+.light-mode header {
+  background: #f8f8f8 !important;
+  color: black !important;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+.light-mode nav a {
+  color: #000 !important;
+}
+
+.light-mode nav a:hover {
+  color: #007bff !important;
+}
+
+/* Logo */
+.light-mode .logo {
+  color: #007bff !important;
+}
+
+/* Boxes / Danh mục */
+.light-mode .box {
+  background: #ececec !important;
+  color: #000 !important;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+
+.light-mode .box h2 {
+  color: #000 !important;
+}
+
+/* Footer */
+.light-mode footer {
+  background: #e0e0e0 !important;
+  color: #000 !important;
+}
+
+/* Modal */
+.light-mode .modal {
+  background: white !important;
+  color: black !important;
+}
+
+.light-mode .modal p,
+.light-mode .modal h2 {
+  color: black !important;
+}
+
+/* Banner chữ LOVE mờ đi để hợp nền trắng */
+.light-mode .banner::after {
+  background: rgba(255,255,255,0.6) !important;
+}
+
 </style>
 </head>
 
@@ -228,6 +398,8 @@ footer button:hover { color:#fff }
     <a href="#" onclick="openModal('intro')">Giới thiệu</a>
     <a href="#" onclick="openModal('contact')">Liên hệ</a>
   </nav>
+<button id="modeToggle" class="mode-btn">🌙</button>
+
 </header>
 
 
@@ -362,9 +534,20 @@ function downloadCodeNgayLe() {
   link.click();
 }
 </script>
+<script>
+document.getElementById("modeToggle").addEventListener("click", function () {
+    document.body.classList.toggle("light-mode");
 
+    // đổi icon
+    if (document.body.classList.contains("light-mode")) {
+        this.innerHTML = "☀️";
+    } else {
+        this.innerHTML = "🌙";
+    }
+});
+
+</script>
 </body>
 </html>
-
 
 
