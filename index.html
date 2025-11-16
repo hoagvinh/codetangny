@@ -66,14 +66,31 @@ header {
 }
 
 
+/* NAV LINKS */
+.right-area {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
 nav a {
-  margin-left: 25px;
   text-decoration: none;
   color: #fff;
   font-weight: 600;
+  font-size: 16px;
+  transition: 0.25s;
 }
 
-nav a:hover { color: #00bfff; }
+nav a:hover {
+  color: #00bfff;
+}
+
 
 /* ===== BANNER ===== */
 .banner {
@@ -247,15 +264,29 @@ footer button:hover { color:#fff }
     margin-right: 6px;
   }
 
+@media (max-width: 768px) {
+
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .right-area {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+
   nav {
-    margin-top: 6px;
+    gap: 16px;
   }
 
   nav a {
-    margin-left: 0;
-    margin-right: 16px;
     font-size: 14px;
   }
+}
+
 
   .banner {
     height: 220px;
@@ -393,14 +424,17 @@ footer button:hover { color:#fff }
     <span class="logo-text">Code Tặng Người Yêu</span>
   </div>
 
-  <nav>
-    <a href="#">Trang chủ</a>
-    <a href="#" onclick="openModal('intro')">Giới thiệu</a>
-    <a href="#" onclick="openModal('contact')">Liên hệ</a>
-  </nav>
-<button id="modeToggle" class="mode-btn">🌙</button>
+  <div class="right-area">
+    <nav>
+      <a href="#">Trang chủ</a>
+      <a href="#" onclick="openModal('intro')">Giới thiệu</a>
+      <a href="#" onclick="openModal('contact')">Liên hệ</a>
+    </nav>
 
+    <button id="modeToggle" class="mode-btn">🌙</button>
+  </div>
 </header>
+
 
 
 <div class="banner">
