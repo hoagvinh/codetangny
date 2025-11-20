@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gửi Em – Trang Web Tặng Người Yêu 💖</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&family=Pacifico&display=swap" rel="stylesheet">
+
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{
+      font-family:"Quicksand",sans-serif;
+      background:radial-gradient(circle at top,#ffe1f2 0%,#f7f4ff 35%,#ffffff 100%);
+      color:#333;min-height:100vh;overflow-x:hidden;
+    }
+
+    a{text-decoration:none;color:inherit}
+
+    /* HEART BG */
+    .hearts-bg{position:fixed;inset:0;z-index:-1;pointer-events:none}
+    .heart{
+      position:absolute;width:18px;height:18px;
+      background:linear-gradient(135deg,#ff7eb3,#ff758c);
+      transform:rotate(45deg);opacity:.28;animation:floatUp 14s linear infinite;
+    }
+    .heart::before,.heart::after{
+      content:"";position:absolute;width:18px;height:18px;
+      background:inherit;border-radius:50%;
+    }
+    .heart::before{top:-9px;left:0}
+    .heart::after{left:-9px;top:0}
+
+    @keyframes floatUp{
+      0%{transform:translateY(100vh) rotate(45deg);opacity:0}
+      20%,80%{opacity:.35}
+      100%{transform:translateY(-20vh) rotate(45deg);opacity:0}
+    }
+
+    .heart:nth-child(1){left:5%;animation-duration:18s}
+    .heart:nth-child(2){left:20%;animation-duration:16s}
+    .heart:nth-child(3){left:40%;animation-duration:20s}
+    .heart:nth-child(4){left:60%;animation-duration:15s}
+    .heart:nth-child(5){left:78%;animation-duration:19s}
+    .heart:nth-child(6){left:90%;animation-duration:21s}
+
+    /* HEADER */
+    header{
+      position:sticky;top:0;z-index:10;
+      background:rgba(255,255,255,.88);
+      backdrop-filter:blur(16px);
+      border-bottom:1px solid rgba(255,150,204,.35);
+    }
+    .nav{
+      max-width:1080px;margin:auto;
+      padding:10px 16px;
+      display:flex;align-items:center;justify-content:space-between;
+      gap:10px;
+    }
+    .nav-left{display:flex;align-items:center;gap:10px}
+    .logo-circle{
+      width:36px;height:36px;border-radius:50%;
+      background:linear-gradient(135deg,#ff7eb3,#ff577b);
+      color:#fff;display:flex;align-items:center;justify-content:center;
+      font-weight:700;font-size:20px;
+      box-shadow:0 6px 14px rgba(255,120,170,.5);
+    }
+    .nav-title{font-weight:700;color:#ff4b8b;font-size:18px}
+    .nav-sub{font-size:11px;color:#777;margin-top:2px}
+
+    .music-btn{
+      border-radius:999px;
+      border:none;
+      padding:8px 14px;
+      font-size:13px;
+      display:flex;align-items:center;gap:6px;
+      cursor:pointer;
+      background:linear-gradient(135deg,#ff9a9e,#fecfef,#fbc2eb,#a18cd1);
+      color:#602040;
+      font-weight:600;
+      box-shadow:0 4px 12px rgba(255,143,187,.55);
+    }
+    .music-dot{
+      width:8px;height:8px;border-radius:50%;
+      background:#ff3366;
+      box-shadow:0 0 10px rgba(255,69,117,.9);
+    }
+    .music-btn.paused .music-dot{
+      background:#aaa;box-shadow:none;
+    }
+
+    main{max-width:1080px;margin:auto;padding:22px 16px 40px}
+    section{
+      background:#fff;border-radius:24px;
+      padding:22px 18px;margin:32px 0;
+      box-shadow:0 14px 40px rgba(255,164,211,.25);
+      position:relative;overflow:hidden;
+    }
+    section::before,section::after{
+      content:"";position:absolute;border-radius:50%;
+    }
+    section::before{
+      width:170px;height:170px;
+      background:radial-gradient(circle,rgba(255,183,234,.65),transparent 60%);
+      top:-50px;right:-40px;opacity:.7;
+    }
+    section::after{
+      width:150px;height:150px;
+      background:radial-gradient(circle,rgba(169,196,255,.6),transparent 60%);
+      bottom:-40px;left:-40px;opacity:.7;
+    }
+    .section-inner{position:relative;z-index:1}
+
+    .section-title{
+      font-size:22px;font-weight:700;color:#ff2f7a;margin-bottom:6px;
+    }
+    .section-sub{
+      font-size:13px;color:#666;margin-bottom:12px;
+    }
+
+    .tag{
+      display:inline-flex;align-items:center;gap:6px;
+      padding:4px 10px;border-radius:999px;
+      font-size:11px;background:rgba(255,167,211,.16);
+      color:#ff3b8a;font-weight:600;margin-bottom:6px;
+    }
+    .tag-dot{
+      width:6px;height:6px;border-radius:50%;background:#ff3b8a;
+    }
+
+    /* HERO */
+    .hero{
+      display:grid;
+      grid-template-columns: minmax(0,1.2fr) minmax(0,1fr);
+      gap:18px;align-items:center;
+    }
+    .hero-main-text{
+      font-size:30px;line-height:1.2;font-weight:700;
+      color:#ff2e88;margin-bottom:10px;
+    }
+    .hero-main-text .name{
+      font-family:"Pacifico",cursive;
+      font-size:34px;color:#ff4b8b;letter-spacing:0.03em;
+    }
+    .hero-desc{
+      font-size:14px;color:#555;margin-bottom:14px;
+    }
+    .hero-tags{
+      display:flex;flex-wrap:wrap;gap:10px;margin-bottom:16px;
+    }
+    .hero-tag{
+      display:inline-flex;align-items:center;gap:6px;
+      padding:6px 14px;border-radius:999px;
+      background:rgba(255,193,218,.28);
+      color:#ff2f7a;font-size:13px;font-weight:600;
+      border:1px solid rgba(255,151,199,.4);
+      box-shadow:0 4px 10px rgba(255,143,187,.2);
+      white-space:nowrap;
+    }
+    .hero-btns{
+      display:flex;flex-wrap:wrap;gap:10px;
+    }
+    .btn-primary{
+      padding:10px 16px;border-radius:999px;border:none;
+      background:linear-gradient(135deg,#ff9a9e,#fad0c4);
+      color:#602040;font-size:13px;font-weight:600;cursor:pointer;
+      box-shadow:0 8px 22px rgba(255,157,187,.6);
+    }
+    .btn-ghost{
+      padding:10px 16px;border-radius:999px;
+      border:1px solid rgba(255,143,187,.7);
+      background:rgba(255,255,255,.9);
+      color:#ff2f7a;font-size:13px;font-weight:600;cursor:pointer;
+    }
+
+    .hero-photo-wrap{
+      width:100%;aspect-ratio:3/4;border-radius:20px;
+      overflow:hidden;position:relative;
+      box-shadow:0 12px 28px rgba(255,143,187,.6);
+      background:#eee;
+    }
+    .hero-photo-wrap img{
+      width:100%;height:100%;object-fit:cover;display:block;
+    }
+    .hero-photo-tag{
+      position:absolute;left:10px;bottom:10px;
+      padding:4px 10px;border-radius:999px;
+      background:rgba(0,0,0,.55);
+      color:#fff;font-size:11px;
+      display:flex;align-items:center;gap:6px;
+    }
+    .hero-photo-tag-dot{
+      width:6px;height:6px;border-radius:50%;background:#ff7eb3;
+      box-shadow:0 0 10px rgba(255,126,179,.9);
+    }
+
+    /* LETTER */
+    .letter-box{
+      background:rgba(255,251,255,.95);
+      border-radius:18px;
+      padding:16px 14px;
+      border:1px dashed rgba(255,151,199,.7);
+    }
+    .letter-box p{
+      font-size:14px;margin-bottom:6px;color:#444;
+    }
+    .letter-sign{
+      margin-top:10px;font-size:13px;text-align:right;
+      font-style:italic;color:#ff2f7a;
+    }
+
+    /* REASONS */
+    .reasons-grid{
+      display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:10px;margin-top:10px;
+    }
+    .reason-card{
+      border-radius:16px;
+      padding:12px 10px;
+      background:rgba(255,245,252,.98);
+      border:1px solid rgba(255,181,216,.8);
+      font-size:12px;min-height:80px;
+      display:flex;flex-direction:column;gap:4px;
+    }
+    .reason-icon{font-size:16px}
+    .reason-title{font-weight:600;color:#ff2f7a}
+    .reason-text{font-size:11px;color:#666}
+
+    /* TIMELINE */
+    .timeline{
+      margin-top:10px;
+      border-left:2px dashed rgba(255,139,190,.8);
+      padding-left:14px;display:flex;flex-direction:column;gap:10px;
+    }
+    .timeline-item{position:relative;padding-left:4px}
+    .timeline-dot{
+      width:12px;height:12px;border-radius:50%;
+      background:#ff4b8b;position:absolute;left:-22px;top:3px;
+      box-shadow:0 0 10px rgba(255,75,139,.7);
+    }
+    .timeline-title{font-size:13px;font-weight:600;color:#ff2f7a;margin-bottom:2px}
+    .timeline-text{font-size:12px;color:#555}
+
+    /* GALLERY */
+    .gallery-grid{
+      display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:8px;margin-top:10px;
+    }
+    .gallery-item{
+      border-radius:14px;overflow:hidden;position:relative;
+      aspect-ratio:1/1;background:#eee;
+    }
+    .gallery-item img{
+      width:100%;height:100%;object-fit:cover;display:block;
+    }
+    .gallery-badge{
+      position:absolute;left:7px;bottom:7px;
+      padding:3px 7px;border-radius:999px;
+      background:rgba(0,0,0,.55);
+      color:#fff;font-size:10px;
+    }
+
+    /* COUNTDOWN */
+    .countdown-box{
+      display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;
+    }
+    .count-card{
+      flex:1;min-width:70px;
+      border-radius:16px;
+      background:rgba(255,242,252,.96);
+      padding:10px 8px;text-align:center;
+      border:1px solid rgba(255,167,211,.85);
+    }
+    .count-number{
+      font-size:18px;font-weight:700;color:#ff2f7a;margin-bottom:4px;
+    }
+    .count-label{font-size:11px;color:#777}
+
+    footer{
+      text-align:center;font-size:11px;color:#666;margin:40px 0;
+    }
+    footer span.highlight{color:#ff2f7a;font-weight:600}
+
+    /* REVEAL */
+    .reveal{opacity:0;transform:translateY(12px);transition:.5s}
+    .reveal.visible{opacity:1;transform:translateY(0)}
+
+    @media(max-width:768px){
+      .hero{grid-template-columns:minmax(0,1fr)}
+      .hero-photo-wrap{max-width:260px;margin:0 auto}
+      section{margin:26px 0;padding:18px 14px}
+      .reasons-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .gallery-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .section-title{font-size:20px}
+      .hero-main-text{font-size:26px}
+      .hero-main-text .name{font-size:30px}
+    }
+  </style>
+</head>
+<body>
+
+<audio id="bg-music" loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<div class="hearts-bg">
+  <div class="heart"></div>
+  <div class="heart"></div>
+  <div class="heart"></div>
+  <div class="heart"></div>
+  <div class="heart"></div>
+  <div class="heart"></div>
+</div>
+
+<header>
+  <nav class="nav">
+    <div class="nav-left">
+      <div class="logo-circle">♥</div>
+      <div>
+        <div class="nav-title">For You</div>
+        <div class="nav-sub" data-bind="subheader">Một trang web nhỏ dành riêng cho em</div>
+      </div>
+    </div>
+
+    <button class="music-btn paused" id="musicToggle">
+      <div class="music-dot"></div>
+      <span id="musicText">Bật nhạc</span>
+    </button>
+  </nav>
+</header>
+
+<main>
+
+  <!-- HERO -->
+  <section id="hero" class="reveal">
+    <div class="section-inner">
+      <div class="hero">
+        <div>
+          <span class="tag"><span class="tag-dot"></span> Chào em, người đặc biệt nhất</span>
+          <h1 class="hero-main-text">
+            <span data-bind="t1">Gửi em,</span><br>
+            <span class="name" data-bind="name">Người đặc biệt nhất của anh</span>
+          </h1>
+          <p class="hero-desc" data-bind="hero_desc">
+            Anh làm trang web nhỏ này chỉ để dành riêng cho em – người khiến cuộc sống của anh trở nên đặc biệt hơn.
+          </p>
+
+          <div class="hero-tags">
+            <div class="hero-tag">✨ Lưu giữ kỷ niệm</div>
+            <div class="hero-tag">💌 Lời anh muốn nói</div>
+            <div class="hero-tag">📸 Những khoảnh khắc của chúng ta</div>
+          </div>
+
+          <div class="hero-btns">
+            <button class="btn-primary"
+              onclick="document.getElementById('letter').scrollIntoView({behavior:'smooth'})">
+              Đọc lời anh gửi em 💌
+            </button>
+            <button class="btn-ghost"
+              onclick="document.getElementById('gallery').scrollIntoView({behavior:'smooth'})">
+              Xem khoảnh khắc của tụi mình 📸
+            </button>
+          </div>
+        </div>
+
+        <div class="hero-photo-wrap">
+          <img data-img="mainImg"
+               src="https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=800"
+               alt="">
+          <div class="hero-photo-tag">
+            <span class="hero-photo-tag-dot"></span>
+            <span>My favorite person 💖</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LETTER -->
+  <section id="letter" class="reveal">
+    <div class="section-inner">
+      <div class="tag"><span class="tag-dot"></span> Lời anh gửi em</div>
+      <h2 class="section-title">Nếu hôm nay em mệt, đọc những dòng này nhé.</h2>
+
+      <div class="letter-box">
+        <p data-bind="lt1">Gửi em,</p>
+        <p data-bind="lt2">Cảm ơn em vì đã bước vào cuộc sống của anh...</p>
+        <p data-bind="lt3">Anh không giỏi nói lời hoa mỹ nên đành viết vào đây.</p>
+        <p data-bind="lt4">Dù sau này có chuyện gì xảy ra, anh vẫn muốn là chỗ để em dựa vào.</p>
+        <p data-bind="lt5">Chỉ cần em còn muốn nắm tay, anh vẫn luôn ở đây.</p>
+        <p class="letter-sign" data-bind="sign">– Anh của em 💗</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- REASONS -->
+  <section id="reasons" class="reveal">
+    <div class="section-inner">
+      <div class="tag"><span class="tag-dot"></span> Vì sao anh yêu em</div>
+      <h2 class="section-title">Một vài lý do anh yêu em 🫶</h2>
+
+      <div class="reasons-grid">
+        <div class="reason-card">
+          <div class="reason-title">Nụ cười của em</div>
+          <div class="reason-text" data-bind="r1">Mỗi lần em cười, cả ngày của anh như sáng lên.</div>
+        </div>
+        <div class="reason-card">
+          <div class="reason-title">Sự chân thành</div>
+          <div class="reason-text" data-bind="r2">Em luôn chân thành với cảm xúc của mình, và điều đó khiến anh thấy an toàn.</div>
+        </div>
+        <div class="reason-card">
+          <div class="reason-title">Những buổi nói chuyện</div>
+          <div class="reason-text" data-bind="r3">Từ chuyện linh tinh đến những ước mơ xa xăm, anh đều muốn được nghe em kể.</div>
+        </div>
+        <div class="reason-card">
+          <div class="reason-title">Cách em quan tâm</div>
+          <div class="reason-text">Những “ăn chưa”, “ngủ sớm đi” nhỏ thôi nhưng làm anh thấy mình được yêu.</div>
+        </div>
+        <div class="reason-card">
+          <div class="reason-title">Cảm giác như “nhà”</div>
+          <div class="reason-text">Chỉ cần ở cạnh em, mọi thứ đều trở nên nhẹ hơn rất nhiều.</div>
+        </div>
+        <div class="reason-card">
+          <div class="reason-title">Vì đó là em</div>
+          <div class="reason-text">Đơn giản là: vì em là em.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TIMELINE -->
+  <section id="timeline" class="reveal">
+    <div class="section-inner">
+      <div class="tag"><span class="tag-dot"></span> Những cột mốc</div>
+      <h2 class="section-title">Hành trình của tụi mình</h2>
+
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-title">Khoảnh khắc 1</div>
+          <div class="timeline-text" data-bind="tl1">
+            Ngày đầu chúng ta nói chuyện nhiều hơn, chỉ vài tin nhắn nhưng lại mở ra cả một hành trình dài.
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-title">Khoảnh khắc 2</div>
+          <div class="timeline-text" data-bind="tl2">
+            Lần đầu gặp em ngoài đời, em còn đẹp hơn tất cả những gì anh tưởng tượng.
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-title">Khoảnh khắc 3</div>
+          <div class="timeline-text" data-bind="tl3">
+            Ngày tụi mình chính thức là "chúng ta" – từ đó tương lai của anh luôn có hình bóng em.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section id="gallery" class="reveal">
+    <div class="section-inner">
+      <div class="tag"><span class="tag-dot"></span> Album nhỏ</div>
+      <h2 class="section-title">Khoảnh khắc của tụi mình 📸</h2>
+
+      <div class="gallery-grid">
+        <div class="gallery-item"><img data-img="g1" src="https://images.pexels.com/photos/3693901/pexels-photo-3693901.jpeg?auto=compress&cs=tinysrgb&w=800"><div class="gallery-badge">1</div></div>
+        <div class="gallery-item"><img data-img="g2" src="https://images.pexels.com/photos/2085998/pexels-photo-2085998.jpeg?auto=compress&cs=tinysrgb&w=800"><div class="gallery-badge">2</div></div>
+        <div class="gallery-item"><img data-img="g3" src="https://images.pexels.com/photos/3693900/pexels-photo-3693900.jpeg?auto=compress&cs=tinysrgb&w=800"><div class="gallery-badge">3</div></div>
+        <div class="gallery-item"><img data-img="g4" src="https://images.pexels.com/photos/3693899/pexels-photo-3693899.jpeg?auto=compress&cs=tinysrgb&w=800"><div class="gallery-badge">4</div></div>
+        <div class="gallery-item"><img data-img="g5" src="https://images.pexels.com/photos/3760850/pexels-photo-3760850.jpeg?auto=compress&cs=tinysrgb&w=800"><div class="gallery-badge">5</div></div>
+        <div class="gallery-item"><img data-img="g6" src="https://images.pexels.com/photos/4255160/pexels-photo-4255160.jpeg?auto=compress&cs=tinysrgb&w=800"><div class="gallery-badge">6</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COUNTDOWN -->
+  <section id="countdown-section" class="reveal">
+    <div class="section-inner">
+      <div class="tag"><span class="tag-dot"></span> Đếm ngược</div>
+      <h2 class="section-title">Chờ đến ngày của tụi mình 🤍</h2>
+
+      <div class="countdown-box" id="countdown" data-target="">
+        <div class="count-card"><div id="days" class="count-number">0</div><div class="count-label">Ngày</div></div>
+        <div class="count-card"><div id="hours" class="count-number">0</div><div class="count-label">Giờ</div></div>
+        <div class="count-card"><div id="minutes" class="count-number">0</div><div class="count-label">Phút</div></div>
+        <div class="count-card"><div id="seconds" class="count-number">0</div><div class="count-label">Giây</div></div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  Made with <span class="highlight">love</span> dành cho <span class="highlight">một người duy nhất</span>.
+</footer>
+
+<script>
+  const params = new URLSearchParams(window.location.search);
+
+  // TEXT
+  document.querySelectorAll("[data-bind]").forEach(el=>{
+    const key = el.dataset.bind;
+    const val = params.get(key);
+    if(val && val.trim() !== ""){
+      el.textContent = val;
+    }
+  });
+
+  // IMAGE (mainImg + g1..g6)
+  document.querySelectorAll("[data-img]").forEach(el=>{
+    const key = el.dataset.img;
+    const val = params.get(key);
+    if(val && val.trim() !== ""){
+      el.src = val;
+    }
+  });
+
+  // COUNTDOWN
+  const cd = params.get("cd");
+  const cdBox = document.getElementById("countdown");
+  if(cd && cdBox){
+    cdBox.dataset.target = cd;
+  }
+
+  // MUSIC
+  const music = document.getElementById("bg-music");
+  const musicToggle = document.getElementById("musicToggle");
+  const musicText = document.getElementById("musicText");
+  let isPlaying = false;
+
+  musicToggle.addEventListener("click", ()=>{
+    if(!isPlaying){
+      music.play().catch(()=>{});
+      isPlaying = true;
+      musicToggle.classList.remove("paused");
+      musicText.textContent = "Tắt nhạc";
+    }else{
+      music.pause();
+      isPlaying = false;
+      musicToggle.classList.add("paused");
+      musicText.textContent = "Bật nhạc";
+    }
+  });
+
+  // REVEAL
+  const reveals = document.querySelectorAll(".reveal");
+  const observer = new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        e.target.classList.add("visible");
+        observer.unobserve(e.target);
+      }
+    });
+  },{threshold:0.15});
+  reveals.forEach(r=>observer.observe(r));
+
+  // COUNTDOWN TICK
+  function startCountdown(){
+    if(!cdBox) return;
+    function update(){
+      const tStr = cdBox.dataset.target;
+      if(!tStr) return;
+      const target = new Date(tStr).getTime();
+      const now = Date.now();
+      let diff = target - now;
+      if(diff < 0) diff = 0;
+
+      const d = Math.floor(diff / (1000*60*60*24));
+      const h = Math.floor((diff / (1000*60*60)) % 24);
+      const m = Math.floor((diff / (1000*60)) % 60);
+      const s = Math.floor((diff / 1000) % 60);
+
+      document.getElementById("days").textContent = d;
+      document.getElementById("hours").textContent = h;
+      document.getElementById("minutes").textContent = m;
+      document.getElementById("seconds").textContent = s;
+    }
+    update();
+    setInterval(update,1000);
+  }
+  startCountdown();
+</script>
+
+</body>
+</html>
