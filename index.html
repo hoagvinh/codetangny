@@ -2,543 +2,937 @@
 <html lang="vi">
 <head>
   <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-KXL21TD9SW"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-KXL21TD9SW"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-KXL21TD9SW');
+  </script>
 
-  gtag('config', 'G-KXL21TD9SW');
-</script>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Code Tặng Người Yêu </title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Code Tặng Người Yêu</title>
 
-<style>
-.mode-btn {
-  background: #222;
-  color: white;
-  border: none;
-  padding: 10px 16px;
-  border-radius: 50px;
-  cursor: pointer;
-  font-size: 18px;
-  transition: 0.3s;
-  margin-left: 20px;
-}
-.mode-btn:hover {
-  transform: scale(1.1);
-}
+  <style>
+    /* ===== RESET ===== */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-/* ===== RESET ===== */
-body {
-  margin: 0;
-  font-family: "Quicksand", sans-serif;
-  background: #0f0f0f;
-  color: #e4e6eb;
-}
+    body {
+      font-family: "Quicksand", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #ffe5ec 0, #fff5f7 40%, #ffeef6 100%);
+      color: #4b2c3b;
+      line-height: 1.5;
+    }
 
-/* ===== HEADER ===== */
-header {
-  background: #000;
-  padding: 18px 40px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  box-shadow: 0 3px 10px rgba(0,0,0,0.6);
-  position: sticky;
-  top: 0;
-  z-index: 999;
-}
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
 
-.logo {
-  font-size: 28px;
-  font-weight: bold;
-  color: #00bfff;
-}
-.logo-area {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
+    /* ===== LAYOUT WRAPPER ===== */
+    .page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
 
-.logo-img {
-  width: 40px;
-  height: 40px;
-  object-fit: contain;
-}
+    /* ===== HEADER ===== */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 99;
+      background: rgba(255, 245, 247, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255, 182, 193, 0.4);
+      box-shadow: 0 6px 18px rgba(255, 105, 180, 0.12);
+    }
 
-.logo-text {
-  font-size: 28px;
-  font-weight: bold;
-  color: #00bfff;
-}
+    .header-inner {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
 
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
 
-/* NAV LINKS */
-.right-area {
-  display: flex;
-  align-items: center;
-  gap: 25px;
-}
+    .logo-img {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 4px 10px rgba(255, 105, 180, 0.35);
+      background: #fff;
+    }
 
-nav {
-  display: flex;
-  align-items: center;
-  gap: 25px;
-}
+    .logo-text-wrap {
+      display: flex;
+      flex-direction: column;
+    }
 
-nav a {
-  text-decoration: none;
-  color: #fff;
-  font-weight: 600;
-  font-size: 16px;
-  transition: 0.25s;
-}
+    .logo-main {
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: 0.03em;
+      color: #e43f6f;
+    }
 
-nav a:hover {
-  color: #00bfff;
-}
+    .logo-sub {
+      font-size: 12px;
+      color: #b27092;
+    }
 
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      font-size: 15px;
+      font-weight: 600;
+    }
 
-/* ===== BANNER ===== */
-.banner {
-  background: url('https://upload.wikimedia.org/wikipedia/en/a/ae/Love_TV_Logo.png') center/cover no-repeat;
-  height: 320px;
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+    nav a {
+      position: relative;
+      color: #7b4368;
+      padding-bottom: 3px;
+      transition: color 0.25s ease;
+    }
 
-.banner::after {
-  content:"";
-  position:absolute;
-  top:0;left:0;right:0;bottom:0;
-  background: rgba(0,0,0,0.45);
-}
+    nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0;
+      height: 2px;
+      border-radius: 10px;
+      background: linear-gradient(90deg, #ff6fb5, #ffc1e3);
+      transition: width 0.25s ease;
+    }
 
-.banner h1 {
-  position:relative;
-  z-index:2;
-  font-family: "Pacifico", cursive;
-  color:#fff;
-  font-size:46px;
-  text-shadow:0 4px 10px rgba(0,0,0,0.6);
-}
+    nav a:hover {
+      color: #e43f6f;
+    }
 
-/* ===== SECTION TITLE ===== */
-.section-title {
-  text-align:center;
-  margin: 40px 0 20px;
-  font-size: 32px;
-  color: #00bfff;
-  text-shadow: 0 4px 10px rgba(0,0,0,0.3);
-}
+    nav a:hover::after {
+      width: 100%;
+    }
 
-/* ===== GRID BOX ===== */
-.grid-boxes {
-  max-width: 1200px;
-  margin: auto;
-  padding: 10px 20px;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
-  gap: 28px;
-}
+    /* ===== BANNER / HERO ===== */
+    .hero {
+      position: relative;
+      overflow: hidden;
+      max-width: 1180px;
+      margin: 22px auto 0px;
+      padding: 6px 16px 6px;
+      border-radius: 24px;
+      background: radial-gradient(circle at top left, #ffe5ec, #ffc1e3);
+      box-shadow: 0 18px 40px rgba(255, 105, 180, 0.25);
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+      align-items: center;
+      gap: 18px;
+    }
 
-.box {
-  background: #1c1c1c;
-  border-radius: 14px;
-  padding: 18px;
-  text-align: center;
-  transition: 0.3s;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.4);
-}
+    .hero::before,
+    .hero::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.38;
+      pointer-events: none;
+    }
 
-.box:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 10px 25px rgba(0,0,0,0.6);
-}
+    .hero::before {
+      width: 260px;
+      height: 260px;
+      background: radial-gradient(circle, #ff9a9e, transparent 60%);
+      top: -80px;
+      right: -40px;
+    }
 
-.box img {
-  width: 100%;
-  height: 190px;
-  border-radius: 12px;
-  object-fit: cover;
-  margin-bottom: 15px;
-}
+    .hero::after {
+      width: 220px;
+      height: 220px;
+      background: radial-gradient(circle, #f8c9ff, transparent 60%);
+      bottom: -60px;
+      left: -40px;
+    }
 
-.box h2 {
-  margin: 10px 0;
-  font-size: 22px;
-  color: #00bfff;
-}
+    .hero-left {
+      position: relative;
+      z-index: 1;
+    }
 
-.box p {
-  color: #c8c8c8;
-  font-size: 14px;
-}
+    .hero-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 12px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.85);
+      font-size: 12px;
+      color: #b2537b;
+      margin-bottom: 10px;
+      box-shadow: 0 4px 10px rgba(255, 182, 193, 0.55);
+    }
 
-/* ===== BUTTON ===== */
-.btn {
-  padding: 10px 18px;
-  background: #006bff;
-  border: none;
-  color: white;
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: 600;
-  transition: 0.25s;
-}
-.btn:hover { background: #0052c7; }
+    .hero-label span.icon {
+      font-size: 14px;
+    }
 
-.btn-row {
-  display:flex;
-  gap:10px;
-  justify-content:center;
-  margin-top:10px;
-}
+    .hero-title {
+      font-family: "Pacifico", system-ui, cursive;
+      font-size: 31px;
+      color: #e43f6f;
+      text-shadow: 0 3px 10px rgba(255, 105, 180, 0.35);
+      margin-bottom: 8px;
+    }
 
-/* ===== FOOTER ===== */
-footer {
-  background: #000;
-  color: #b9bbbe;
-  padding: 18px;
-  text-align:center;
-  margin-top: 50px;
-  border-top: 1px solid #333;
-}
+    .hero-subtitle {
+      font-size: 15px;
+      color: #7b4368;
+      margin-bottom: 14px;
+    }
 
-footer button {
-  background: none;
-  border: none;
-  color: #b9bbbe;
-  margin: 0 20px;
-  font-size: 16px;
-  cursor: pointer;
-}
-footer button:hover { color:#fff }
+    .hero-desc {
+      font-size: 14px;
+      color: #9c6385;
+      max-width: 440px;
+      margin-bottom: 18px;
+    }
 
-/* ===== MODAL ===== */
-.overlay {
-  position: fixed; inset:0;
-  background: rgba(0,0,0,0.55);
-  backdrop-filter: blur(5px);
-  display:none;
-  justify-content:center;
-  align-items:center;
-}
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
 
-.modal {
-  background:#1f1f1f;
-  width:90%;
-  max-width:430px;
-  border-radius:12px;
-  padding:22px;
-  animation: zoomIn .25s ease;
-  color:#fff;
-  position:relative;
-}
+    .btn-primary {
+      border: none;
+      outline: none;
+      cursor: pointer;
+      padding: 9px 18px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 14px;
+      background: linear-gradient(135deg, #ff6fb5, #ff9a9e);
+      color: #fff;
+      box-shadow: 0 8px 18px rgba(255, 105, 180, 0.5);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease;
+    }
 
-.close-btn {
-  position:absolute;
-  right:10px;
-  top:10px;
-  cursor:pointer;
-  font-size:20px;
-  color:#888;
-}
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.03);
+      box-shadow: 0 10px 24px rgba(255, 105, 180, 0.65);
+    }
 
-@keyframes zoomIn {
-  from { transform: scale(0.85); opacity:0; }
-  to { transform: scale(1); opacity:1; }
-}
+    .btn-ghost {
+      border-radius: 999px;
+      border: 1px solid rgba(228, 63, 111, 0.25);
+      background: rgba(255, 255, 255, 0.7);
+      padding: 8px 14px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #b2537b;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: background 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
+    }
 
-/* ===== TÙY CHỈNH CHO MOBILE ===== */
-@media (max-width: 768px) {
+    .btn-ghost:hover {
+      background: rgba(255, 255, 255, 1);
+      border-color: rgba(228, 63, 111, 0.5);
+      transform: translateY(-1px);
+    }
 
-  header {
-    padding: 10px 16px;
-    flex-direction: column;
-    align-items: flex-start;
-  }
+    .hero-right {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      justify-content: center;
+    }
 
-  .logo {
-    font-size: 20px;
-    line-height: 1.2;
-  }
-
-  .logo img {
-    width: 28px;
-    margin-right: 6px;
-  }
-
-@media (max-width: 768px) {
-
-  header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
-  }
-
-  .right-area {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-  }
-
-  nav {
-    gap: 16px;
-  }
-
-  nav a {
-    font-size: 14px;
-  }
+    .heart-card {
+      position: relative;
+      width: 220px;
+      height: 220px;
+      border-radius: 28px;
+      background: radial-gradient(circle at 20% 0, #ffe5ec, #ff9a9e);
+      box-shadow:
+        0 18px 40px rgba(255, 105, 180, 0.55),
+        0 0 0 1px rgba(255, 255, 255, 0.75);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+        animation: heartCombo 3s ease-in-out infinite;
 }
 
+    .heart-shape {
+      font-size: 64px;
+      filter: drop-shadow(0 6px 14px rgba(226, 51, 102, 0.65));
+      margin-bottom: 4px;
+    }
 
-  .banner {
-    height: 220px;
-  }
+    .heart-text-main {
+      font-weight: 700;
+      font-size: 16px;
+      color: #fff;
+      text-shadow: 0 2px 6px rgba(191, 33, 89, 0.8);
+    }
 
-  .banner h1 {
-    font-size: 26px;
-    padding: 0 16px;
-    text-align: center;
-  }
+    .heart-text-sub {
+      font-size: 12px;
+      color: #ffe5f1;
+    }
 
-  .section-title {
-    font-size: 24px;
-    margin: 24px 0 16px;
-  }
+    .heart-bubble {
+      position: absolute;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      color: #e43f6f;
+      box-shadow: 0 6px 14px rgba(255, 182, 193, 0.65);
+      animation: float 4s ease-in-out infinite;
+    }
 
-  .grid-boxes {
-    padding: 0 10px 30px;
-    gap: 16px;
-  }
+    .heart-bubble:nth-child(1) {
+      top: 16px;
+      right: 22px;
+      animation-delay: 0s;
+    }
 
-  .box {
-    padding: 14px;
-  }
+    .heart-bubble:nth-child(2) {
+      bottom: 16px;
+      left: 22px;
+      animation-delay: 1s;
+    }
 
-  .box img {
-    height: 160px;
-  }
+    .heart-bubble:nth-child(3) {
+      top: 50%;
+      left: -10px;
+      transform: translateY(-50%);
+      animation-delay: 1.8s;
+    }
 
-  .box h2 {
-    font-size: 18px;
-  }
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-8px);
+      }
+    }
 
-  .box p {
-    font-size: 13px;
-  }
+    /* ===== SECTION TITLE ===== */
+    .section-wrap {
+      max-width: 1180px;
+      margin: 10px auto 40px;
+      padding: 0 20px 30px;
+      flex: 1;
+    }
 
-  .btn {
-    padding: 8px 14px;
-    font-size: 13px;
-  }
+    .section-title {
+      text-align: center;
+      margin: 10px 0 18px;
+      font-size: 22px;
+      color: #e43f6f;
+      text-shadow: 0 2px 8px rgba(255, 192, 203, 0.6);
+      position: relative;
+    }
 
-  .modal {
-    width: 92%;
-    max-width: 360px;
-    padding: 16px;
-  }
+    .section-title::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: -6px;
+      width: 80px;
+      height: 3px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #ff6fb5, #ffc1e3);
+      box-shadow: 0 3px 10px rgba(255, 105, 180, 0.55);
+    }
 
-  .modal h2 {
-    font-size: 18px;
-  }
+    .section-subtitle {
+      text-align: center;
+      margin-top: 16px;
+      font-size: 13px;
+      color: #9c6385;
+    }
 
-  .modal p {
-    font-size: 14px;
-  }
+    /* ===== GRID CARDS ===== */
+    .grid-boxes {
+      margin-top: 22px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
 
-  .close-btn {
-    font-size: 18px;
-  }
+    .box {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 20px;
+      padding: 14px 14px 16px;
+      box-shadow: 0 14px 28px rgba(255, 105, 180, 0.18);
+      border: 1px solid rgba(255, 192, 203, 0.65);
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+    }
+
+    .box:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 18px 34px rgba(255, 105, 180, 0.3);
+      border-color: rgba(255, 105, 180, 0.9);
+    }
+
+    .box-img-wrap {
+      position: relative;
+      overflow: hidden;
+      border-radius: 16px;
+      margin-bottom: 12px;
+      background: #fff;
+    }
+
+    .box img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.3s ease;
+    }
+
+    .box:hover img {
+      transform: scale(1.05);
+    }
+
+    .box-tag {
+      position: absolute;
+      left: 10px;
+      top: 10px;
+      padding: 3px 10px;
+      border-radius: 999px;
+      background: rgba(0, 0, 0, 0.45);
+      color: #ffeef6;
+      font-size: 11px;
+      backdrop-filter: blur(6px);
+    }
+
+    .box h2 {
+      font-size: 17px;
+      margin-bottom: 4px;
+      color: #e43f6f;
+    }
+
+    .box p {
+      font-size: 13px;
+      color: #8a5478;
+      margin-bottom: 10px;
+      flex: 1;
+    }
+
+    .btn-row {
+      display: flex;
+      gap: 8px;
+      justify-content: flex-start;
+      flex-wrap: wrap;
+      margin-top: 6px;
+    }
+
+    .btn-small {
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      padding: 7px 12px;
+      font-size: 12px;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+    }
+
+    .btn-small.primary {
+      background: linear-gradient(135deg, #ff6fb5, #ff9a9e);
+      color: #fff;
+      box-shadow: 0 6px 14px rgba(255, 105, 180, 0.55);
+    }
+
+    .btn-small.primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 18px rgba(255, 105, 180, 0.7);
+    }
+
+    .btn-small.outline {
+      background: #fff;
+      color: #e43f6f;
+      border: 1px solid rgba(228, 63, 111, 0.3);
+    }
+
+    .btn-small.outline:hover {
+      background: #fff0f6;
+      transform: translateY(-1px);
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      margin-top: auto;
+      background: #ffe5ec;
+      border-top: 1px solid rgba(255, 182, 193, 0.7);
+      padding: 12px 16px 14px;
+    }
+
+    .footer-inner {
+      max-width: 1180px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      font-size: 12px;
+      color: #9c6385;
+    }
+
+    .footer-buttons {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .footer-btn {
+      border: none;
+      background: #fff;
+      color: #b2537b;
+      border-radius: 999px;
+      padding: 6px 12px;
+      font-size: 12px;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(255, 192, 203, 0.6);
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: background 0.2s ease, transform 0.15s ease;
+    }
+
+    .footer-btn:hover {
+      background: #ffe4f0;
+      transform: translateY(-1px);
+    }
+
+    /* ===== MODAL ===== */
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.45);
+      backdrop-filter: blur(4px);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 120;
+    }
+
+    .modal {
+      background: #fff8fb;
+      color: #4b2c3b;
+      width: 92%;
+      max-width: 420px;
+      border-radius: 20px;
+      padding: 18px 18px 16px;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.25);
+      position: relative;
+      animation: zoomIn 0.22s ease-out;
+    }
+
+.modal::before {
+  content: "❤";
+  position: absolute;
+  font-size: 26px;
+  right: 20px;
+  bottom: 12px; /* đổi vị trí xuống góc dưới phải */
+  opacity: 0.2;
 }
-/* ======================== */
-/*       LIGHT MODE         */
-/* ======================== */
 
-.light-mode {
-  background: #ffffff !important;
-  color: #000000 !important;
-}
+    @keyframes zoomIn {
+      from {
+        transform: scale(0.9) translateY(6px);
+        opacity: 0;
+      }
+      to {
+        transform: scale(1) translateY(0);
+        opacity: 1;
+      }
+    }
 
-.light-mode * {
-  color: #000000 !important;
-}
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 12px;
+      font-size: 18px;
+      cursor: pointer;
+      color: #b27092;
+    }
 
-/* Header */
-.light-mode header {
-  background: #f8f8f8 !important;
-  color: black !important;
-  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-}
+    .modal h2 {
+      font-size: 18px;
+      margin-bottom: 6px;
+      color: #e43f6f;
+    }
 
-.light-mode nav a {
-  color: #000 !important;
-}
+    .modal p {
+      font-size: 14px;
+      color: #7b4368;
+      margin-bottom: 4px;
+    }
 
-.light-mode nav a:hover {
-  color: #007bff !important;
-}
+    .modal small {
+      font-size: 12px;
+      color: #b27092;
+    }
 
-/* Logo */
-.light-mode .logo {
-  color: #007bff !important;
-}
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: minmax(0, 1fr);
+        padding: 20px 16px 20px;
+      }
 
-/* Boxes / Danh mục */
-.light-mode .box {
-  background: #ececec !important;
-  color: #000 !important;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-}
+      .hero-right {
+        order: -1;
+      }
 
-.light-mode .box h2 {
-  color: #000 !important;
-}
+      .heart-card {
+        width: 200px;
+        height: 200px;
+        overflow: hidden;
+padding: 0;
 
-/* Footer */
-.light-mode footer {
-  background: #e0e0e0 !important;
-  color: #000 !important;
-}
+      }
+    }
 
-/* Modal */
-.light-mode .modal {
-  background: white !important;
-  color: black !important;
-}
+    @media (max-width: 720px) {
+      .header-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
 
-.light-mode .modal p,
-.light-mode .modal h2 {
-  color: black !important;
-}
+      nav {
+        width: 100%;
+        justify-content: flex-start;
+        gap: 14px;
+        font-size: 14px;
+      }
 
-/* Banner chữ LOVE mờ đi để hợp nền trắng */
-.light-mode .banner::after {
-  background: rgba(255,255,255,0.6) !important;
-}
+      .hero-title {
+        font-size: 26px;
+      }
 
-</style>
+      .hero-subtitle {
+        font-size: 14px;
+      }
+
+      .grid-boxes {
+        gap: 16px;
+      }
+
+      .box img {
+        height: 160px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero {
+        margin-top: 0px;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .btn-primary,
+      .btn-ghost {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .section-wrap {
+        padding: 0 14px 24px;
+      }
+
+      .box {
+        padding: 12px;
+      }
+    }
+  </style>
 </head>
 
 <body>
+<div class="page">
 
-<header>
-  <div class="logo-area">
-    <img src="image/htv_logo.png" class="logo-img">
-    <span class="logo-text">Code Tặng Người Yêu</span>
-  </div>
+  <!-- ===== HEADER ===== -->
+  <header>
+    <div class="header-inner">
+      <div class="logo-area">
+        <img src="image/htv_logo.png" alt="Logo" class="logo-img">
+        <div class="logo-text-wrap">
+          <span class="logo-main">Code Tặng Người Yêu</span>
+          <span class="logo-sub">Tự tay làm quà • Tự tay gửi thương</span>
+        </div>
+      </div>
 
-  <div class="right-area">
-    <nav>
-      <a href="#">Trang chủ</a>
-      <a href="#" onclick="openModal('intro')">Giới thiệu</a>
-      <a href="#" onclick="openModal('contact')">Liên hệ</a>
-    </nav>
+      <nav>
+        <a href="#">Trang chủ</a>
+        <a href="javascript:void(0)" onclick="openModal('intro')">Giới thiệu</a>
+        <a href="javascript:void(0)" onclick="openModal('contact')">Liên hệ</a>
+      </nav>
+    </div>
+  </header>
 
-    <button id="modeToggle" class="mode-btn">🌙</button>
-  </div>
-</header>
+  <!-- ===== BANNER / HERO ===== -->
+  <section class="hero">
+    <div class="hero-left">
+      <div class="hero-label">
+        <span class="icon">💌</span>
+        <span>Web nhỏ – Tấm lòng lớn</span>
+      </div>
+      <h1 class="hero-title">Tặng người bạn thương</h1>
+      <p class="hero-subtitle">
+        Một chiếc web xinh xinh, mở ra là thấy ngay tình cảm của bạn.
+      </p>
+      <p class="hero-desc">
+        Chọn mẫu, chỉnh sửa chút chữ, chút hình rồi gửi link.
+        Không cần pro lập trình, chỉ cần bạn thật lòng là đủ.
+      </p>
+      <div class="hero-actions">
+        <button class="btn-ghost" onclick="document.getElementById('gift-section').scrollIntoView({behavior: 'smooth'})">
+          ✨ Xem toàn bộ mẫu
+        </button>
+      </div>
+    </div>
 
+ <div class="heart-card">
+    <img src="image/galaxy_heart_pulse.png" 
+         alt="Galaxy Heart" 
+         style="width: 100%; height: 100%; object-fit: cover; border-radius: 28px;">
+</div>
+  </section>
 
+  <!-- ===== SECTION: DANH MỤC ===== -->
+  <main class="section-wrap">
+    <h2 class="section-title" id="gift-section">Danh mục quà web</h2>
+    <p class="section-subtitle">
+      Những mẫu web nhỏ xinh, bạn có thể dùng để tỏ tình, kỷ niệm, nói lời cảm ơn hoặc đơn giản là làm người kia bất ngờ.
+    </p>
 
-<div class="banner">
-  <h1>Tặng người bạn thương </h1>
+    <section class="grid-boxes">
+
+      <!-- BOX 1: WEB TẶNG NY NGÀY LỄ -->
+      <article class="box">
+        <div class="box-img-wrap">
+          <img src="https://media.desenio.com/site_images/6859e3fdc307ab98cee8d92c_1509080004_7858-3.jpg" alt="Web tặng ny ngày lễ">
+          <span class="box-tag">Thiệp mở</span>
+        </div>
+        <h2>Web tặng ny ngày lễ</h2>
+        <p>
+          Dạng thiệp mở, có nhạc, hình kỷ niệm, lời nhắn yêu thương.
+          Mở ra là cảm giác như được tặng cả một thế giới nhỏ.
+        </p>
+        <div class="btn-row">
+          <button class="btn-small primary" onclick="location.href='mautangny.html'">
+            🔍 Xem mẫu
+          </button>
+          <button class="btn-small outline" onclick="downloadCodeNgayLe()">
+            ⬇ Tải code
+          </button>
+        </div>
+      </article>
+
+      <!-- BOX 2: TRÁI TIM VŨ TRỤ -->
+      <article class="box">
+        <div class="box-img-wrap">
+          <img src="image/traitim.png" alt="Trái tim vũ trụ">
+          <span class="box-tag">Lung linh</span>
+        </div>
+        <h2>Trái tim vũ trụ</h2>
+        <p>
+          Trái tim xoay giữa vũ trụ đầy sao.
+          Rất hợp để tặng người “là cả bầu trời” của bạn.
+        </p>
+        <div class="btn-row">
+          <button class="btn-small primary" onclick="location.href='traitimvutru.html'">
+            💗 Xem mẫu
+          </button>
+          <button class="btn-small outline" onclick="window.open('https://github.com/DrGifter/Gift_HeartStar?tab=readme-ov-file', '_blank')">
+            💾 Web lấy code
+          </button>
+        </div>
+      </article>
+
+      <!-- BOX 3: WEB TỎ TÌNH -->
+      <article class="box">
+        <div class="box-img-wrap">
+          <img src="https://dimensions.edu.vn/upload/2025/08/meme-to-tinh-2.webp" alt="Web tỏ tình">
+          <span class="box-tag">Tỏ tình</span>
+        </div>
+        <h2>Web tỏ tình</h2>
+        <p>
+          Giao diện lung linh, có thư tỏ tình siêu ngọt, kéo xuống là từng dòng tâm sự.
+          Dùng để nói điều khó nói bằng lời.
+        </p>
+        <div class="btn-row">
+          <button class="btn-small primary" onclick="location.href='totinh.html'">
+            💌 Xem mẫu
+          </button>
+          <button class="btn-small outline" onclick="window.open('https://github.com/DrGifter/Gift_Letter', '_blank')">
+            💾 Web lấy code
+          </button>
+        </div>
+      </article>
+
+      <!-- BOX 4: WEB TỎ TÌNH 2 -->
+      <article class="box">
+        <div class="box-img-wrap">
+          <img src="image/alalal.png" alt="Web tỏ tình 2">
+          <span class="box-tag">Cute</span>
+        </div>
+        <h2>Web tỏ tình 2</h2>
+        <p>
+          Dạng thiệp mở đơn giản nhưng dễ thương.
+          Hợp với kiểu tình cảm nhẹ nhàng, không “sến” quá.
+        </p>
+        <div class="btn-row">
+          <button class="btn-small primary" onclick="location.href='totinh2.html'">
+            💝 Xem mẫu
+          </button>
+          <button class="btn-small outline" onclick="window.open('https://github.com/QuangNhat2003/To-Tinh-Crush', '_blank')">
+            💾 Web lấy code
+          </button>
+        </div>
+      </article>
+
+      <!-- BOX 5: NETFLIX LOVE STORY -->
+      <article class="box">
+        <div class="box-img-wrap">
+          <img src="https://dedicapag.com/en/images/net.gif" alt="Netflix our love story">
+          <span class="box-tag">Story</span>
+        </div>
+        <h2>Netflix – Our Love Story</h2>
+        <p>
+          Biến chuyện tình của hai bạn thành một “bộ phim” Netflix.
+          Từng tập là từng kỷ niệm dễ thương.
+        </p>
+        <div class="btn-row">
+          <button class="btn-small primary" onclick="window.open('https://dedicapag.com/en/PagNetEn/create_message.php', '_blank')">
+            🎬 Web tạo
+          </button>
+        </div>
+      </article>
+
+      <!-- BOX 6: GALAXY OF LOVE -->
+      <article class="box">
+        <div class="box-img-wrap">
+          <img src="https://dedicapag.com/en/images/Galaxy.gif" alt="Galaxy of Love">
+          <span class="box-tag">Universe</span>
+        </div>
+        <h2>Galaxy of Love</h2>
+        <p>
+          Vũ trụ nhỏ nơi tên người thương được treo giữa trời sao.
+          Hợp tặng người thân, bạn bè lẫn người yêu.
+        </p>
+        <div class="btn-row">
+          <button class="btn-small primary" onclick="window.open('https://dedicapag.com/en/PagGalaxyEn/create_message.php', '_blank')">
+            🌌 Web tạo
+          </button>
+        </div>
+      </article>
+
+      <!-- BOX 7: QR GENERATOR -->
+      <article class="box">
+        <div class="box-img-wrap">
+          <img src="https://tse1.mm.bing.net/th/id/OIP.YsXYq6OWbtjxGlIHR__O5QHaE7?cb=ucfimg2ucfimg=1&rs=1&pid=ImgDetMain&o=7&rm=3" alt="QR Generator">
+          <span class="box-tag">Tiện ích</span>
+        </div>
+        <h2>QR Generator</h2>
+        <p>
+          Tạo mã QR cho link trang web tỏ tình / kỷ niệm.
+          In ra giấy, dán vào quà hoặc gửi người ta quét thử.
+        </p>
+        <div class="btn-row">
+          <button class="btn-small primary" onclick="location.href='maqr.html'">
+            🔗 Tạo QR
+          </button>
+        </div>
+      </article>
+
+      <!-- BOX 8: RANDOM SỐ -->
+      <article class="box">
+        <div class="box-img-wrap">
+          <img src="https://tse3.mm.bing.net/th/id/OIP.YjJSBQVO5Cy9RBxwNqfj7AHaJ5?cb=ucfimg2ucfimg=1&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Random số ngẫu nhiên">
+          <span class="box-tag">Minigame</span>
+        </div>
+        <h2>Chọn số ngẫu nhiên</h2>
+        <p>
+          Dùng để chơi minigame quyết định “ai là người rửa bát”, “ai nói lời yêu trước”,
+          hoặc bất cứ trò vui nào hai bạn nghĩ ra.
+        </p>
+        <div class="btn-row">
+          <button class="btn-small primary" onclick="location.href='donghobip.html'">
+            🎲 Chọn số
+          </button>
+        </div>
+      </article>
+
+    </section>
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-text">
+        © <span id="year"></span> • Làm web tặng người ta, nhưng đừng quên thương mình nữa nha 💗
+      </div>
+      <div class="footer-buttons">
+        <button class="footer-btn" onclick="openModal('intro')">
+          💡 Giới thiệu
+        </button>
+        <button class="footer-btn" onclick="openModal('info')">
+          ℹ Thông tin
+        </button>
+        <button class="footer-btn" onclick="openModal('contact')">
+          📩 Liên hệ
+        </button>
+      </div>
+    </div>
+  </footer>
 </div>
 
-<h2 class="section-title">Danh mục</h2>
-
-<section class="grid-boxes">
-
-  <!-- BOX 1 -->
-  <div class="box">
-    <img src="https://media.desenio.com/site_images/6859e3fdc307ab98cee8d92c_1509080004_7858-3.jpg">
-    <h2> Web tặng ny ngày lễ</h2>
-    <p>Dạng thiệp mở, nhạc tình cảm và ảnh.</p>
-
-    <div class="btn-row">
-      <button class="btn" onclick="location.href='mautangny.html'">Xem mẫu</button>
-      <button class="btn" onclick="downloadCodeNgayLe()">Tải Code</button>
-    </div>
-  </div>
-
-  <!-- BOX 2 -->
-  <div class="box">
-    <img src="image/traitim.png">
-    <h2> Trái tim vũ trụ</h2>
-    <p>Trái tim tình yêu lãng mạn, lung linh</p>
-    <div class="btn-row">
-    <button class="btn" onclick="location.href='traitimvutru.html'">Xem mẫu</button>
-    <button class="btn" onclick="window.open('https://github.com/DrGifter/Gift_HeartStar?tab=readme-ov-file', '_blank')">Web lấy code</button>
-    </div>
-  </div>
-
-  <!-- BOX 3 -->
-  <div class="box">
-    <img src="https://dimensions.edu.vn/upload/2025/08/meme-to-tinh-2.webp">
-    <h2> Web tỏ tình</h2>
-    <p>Giao diện lung linh, thư tỏ tình crush ngọt ngào.</p>
-    <div class="btn-row">
-    <button class="btn" onclick="location.href='totinh.html'">Xem mẫu</button>
-   <button class="btn" onclick="window.open('https://github.com/DrGifter/Gift_Letter', '_blank')">Web lấy code</button>
-    </div>
-  </div>
-  <!-- BOX 1 -->
-  <div class="box">
-    <img src="image/alalal.png">
-    <h2> Web tỏ tình 2</h2>
-    <p>Dạng thiệp mở.</p>
-
-    <div class="btn-row">
-      <button class="btn" onclick="location.href='totinh2.html'">Xem mẫu</button>
-      <button class="btn" onclick="window.open('https://github.com/QuangNhat2003/To-Tinh-Crush', '_blank')">Web lấy code</button>
-    </div>
-  </div>
-    <!-- BOX 6 -->
-  <div class="box">
-    <img src="https://dedicapag.com/en/images/net.gif">
-    <h2> Netflix- our love story</h2>
-    <p>Làm bộ phim netfilx về tình yêu của bạn</p>
-   <button class="btn" onclick="window.open('https://dedicapag.com/en/PagNetEn/create_message.php', '_blank')">Web tạo</button>
-  </div>
-
-      <!-- BOX 6 -->
-  <div class="box">
-    <img src="https://dedicapag.com/en/images/Galaxy.gif">
-    <h2> Galaxy of Love</h2>
-    <p>Vũ trụ tình yêu dành cho người thân của bạn</p>
-   <button class="btn" onclick="window.open('https://dedicapag.com/en/PagGalaxyEn/create_message.php', '_blank')">Web tạo</button>
-  </div>
-  
-  <!-- BOX 4 -->
-  <div class="box">
-    <img src="https://tse1.mm.bing.net/th/id/OIP.YsXYq6OWbtjxGlIHR__O5QHaE7?cb=ucfimg2ucfimg=1&rs=1&pid=ImgDetMain&o=7&rm=3">
-    <h2> QR Generator</h2>
-    <p>Tạo mã QR cho link trang web.</p>
-    <button class="btn" onclick="location.href='maqr.html'">Tạo QR</button>
-  </div>
-
-  <!-- BOX 5 -->
-  <div class="box">
-    <img src="https://tse3.mm.bing.net/th/id/OIP.YjJSBQVO5Cy9RBxwNqfj7AHaJ5?cb=ucfimg2ucfimg=1&rs=1&pid=ImgDetMain&o=7&rm=3">
-    <h2> Chọn số ngẫu nhiên</h2>
-    <p>Random số thú vị.</p>
-    <button class="btn" onclick="location.href='donghobip.html'">Chọn số</button>
-  </div>
-
-</section>
-
-<footer>
-  <button onclick="openModal('intro')">Giới thiệu</button>
-  <button onclick="openModal('info')">Thông tin</button>
-  <button onclick="openModal('contact')">Liên hệ</button>
-</footer>
-
-<!-- MODAL -->
+<!-- ===== MODAL ===== -->
 <div id="overlay" class="overlay">
   <div class="modal">
     <span class="close-btn" onclick="closeModal()">✖</span>
@@ -547,50 +941,92 @@ footer button:hover { color:#fff }
 </div>
 
 <script>
-function openModal(type) {
-  let c = "";
+  // Năm footer
+  document.getElementById("year").textContent = new Date().getFullYear();
 
-  if(type==="intro")
-    c = `<h2> Giới thiệu</h2>
-         <p>Trang web giúp bạn tạo ra những món quà tặng người yêu, người thân một cách đơn giản và đẹp mắt.</p>`;
+  function openModal(type) {
+    let c = "";
 
-  if(type==="info")
-    c = `<h2> Thông tin</h2>
-         <p> Tác giả: missubbi<br> Công nghệ: HTML/CSS/JS</p>`;
+    if (type === "intro") {
+      c = `
+        <h2>Giới thiệu</h2>
+        <p>
+          Trang này được làm ra để giúp bạn tạo những món quà nhỏ nhưng nhiều tình cảm
+          dành cho người yêu, người thân, bạn bè.
+        </p>
+        <p>
+          Chỉ cần chọn mẫu, chỉnh lại đôi dòng chữ, thêm vài tấm hình là đã có một món quà
+          mang dấu ấn riêng của hai người.
+        </p>
+        <small>“Không cần quá hoành tráng, chỉ cần là của riêng hai ta.”</small>
+      `;
+    }
 
-  if(type==="contact")
-    c = `<h2> Liên hệ</h2>
-         <p><br>Email: hgvinh291205@gmail.com</p>`;
+    if (type === "info") {
+      c = `
+        <h2>Thông tin</h2>
+        <p>Tác giả: missubbi</p>
+        <p>Công nghệ: HTML / CSS / JavaScript</p>
+        <p>
+          Một vài mẫu được tham khảo / tổng hợp từ cộng đồng, GitHub và các trang tạo quà online.
+        </p>
+      `;
+    }
 
-  document.getElementById("modalContent").innerHTML = c;
-  document.getElementById("overlay").style.display = "flex";
-}
+    if (type === "contact") {
+      c = `
+        <h2>Liên hệ</h2>
+        <p>Nếu bạn có ý tưởng mẫu web mới hoặc cần chỉnh sửa riêng, có thể liên hệ:</p>
+        <p>Email: <strong>hgvinh291205@gmail.com</strong></p>
+        <small>
+          Hãy kể sơ qua câu chuyện của bạn, biết đâu mình nghĩ giúp được một concept web xịn hơn. 💌
+        </small>
+      `;
+    }
 
-function closeModal(){
-  document.getElementById("overlay").style.display = "none";
-}
+    document.getElementById("modalContent").innerHTML = c;
+    document.getElementById("overlay").style.display = "flex";
+  }
 
-function downloadCodeNgayLe() {
-  const link = document.createElement("a");
-  link.href = "wordmautangny.docx"; 
-  link.download = "code_tang_nguoi_yeu.docx";
-  link.click();
-}
+  function closeModal() {
+    document.getElementById("overlay").style.display = "none";
+  }
+
+  // Nút tải code ngày lễ
+  function downloadCodeNgayLe() {
+    const link = document.createElement("a");
+    link.href = "wordmautangny.docx";
+    link.download = "code_tang_nguoi_yeu.docx";
+    link.click();
+  }
 </script>
 <script>
-document.getElementById("modeToggle").addEventListener("click", function () {
-    document.body.classList.toggle("light-mode");
-
-    // đổi icon
-    if (document.body.classList.contains("light-mode")) {
-        this.innerHTML = "☀️";
-    } else {
-        this.innerHTML = "🌙";
+// Chặn F12
+document.addEventListener("keydown", function(e) {
+    if (e.key === "F12") {
+        e.preventDefault();
     }
 });
 
+// Chặn Ctrl+Shift+I (Inspect)
+document.addEventListener("keydown", function(e) {
+    if (e.ctrlKey && e.shiftKey && e.key === "I") {
+        e.preventDefault();
+    }
+});
+
+// Chặn Ctrl+U (View Source)
+document.addEventListener("keydown", function(e) {
+    if (e.ctrlKey && e.key === "u") {
+        e.preventDefault();
+    }
+});
+
+// Chặn chuột phải
+document.addEventListener("contextmenu", function(e) {
+    e.preventDefault();
+});
 </script>
+
 </body>
 </html>
-
-
