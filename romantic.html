@@ -223,7 +223,6 @@
       font-size:12px;min-height:80px;
       display:flex;flex-direction:column;gap:4px;
     }
-    .reason-icon{font-size:16px}
     .reason-title{font-weight:600;color:#ff2f7a}
     .reason-text{font-size:11px;color:#666}
 
@@ -301,7 +300,7 @@
 <body>
 
 <audio id="bg-music" loop>
-  <source src="music.mp3" type="audio/mpeg">
+  <source id="musicSrc" src="music.mp3" type="audio/mpeg">
 </audio>
 
 <div class="hearts-bg">
@@ -402,28 +401,40 @@
 
       <div class="reasons-grid">
         <div class="reason-card">
-          <div class="reason-title">Nụ cười của em</div>
-          <div class="reason-text" data-bind="r1">Mỗi lần em cười, cả ngày của anh như sáng lên.</div>
+          <div class="reason-title" data-bind="rt1">Nụ cười của em</div>
+          <div class="reason-text" data-bind="r1">
+            Mỗi lần em cười, cả ngày của anh như sáng lên.
+          </div>
         </div>
         <div class="reason-card">
-          <div class="reason-title">Sự chân thành</div>
-          <div class="reason-text" data-bind="r2">Em luôn chân thành với cảm xúc của mình, và điều đó khiến anh thấy an toàn.</div>
+          <div class="reason-title" data-bind="rt2">Sự chân thành</div>
+          <div class="reason-text" data-bind="r2">
+            Em luôn chân thành với cảm xúc của mình, và điều đó khiến anh thấy an toàn.
+          </div>
         </div>
         <div class="reason-card">
-          <div class="reason-title">Những buổi nói chuyện</div>
-          <div class="reason-text" data-bind="r3">Từ chuyện linh tinh đến những ước mơ xa xăm, anh đều muốn được nghe em kể.</div>
+          <div class="reason-title" data-bind="rt3">Những buổi nói chuyện</div>
+          <div class="reason-text" data-bind="r3">
+            Từ chuyện linh tinh đến những ước mơ xa xăm, anh đều muốn được nghe em kể.
+          </div>
         </div>
         <div class="reason-card">
-          <div class="reason-title">Cách em quan tâm</div>
-          <div class="reason-text">Những “ăn chưa”, “ngủ sớm đi” nhỏ thôi nhưng làm anh thấy mình được yêu.</div>
+          <div class="reason-title" data-bind="rt4">Cách em quan tâm</div>
+          <div class="reason-text" data-bind="r4">
+            Những “ăn chưa”, “ngủ sớm đi” nhỏ thôi nhưng làm anh thấy mình được yêu.
+          </div>
         </div>
         <div class="reason-card">
-          <div class="reason-title">Cảm giác như “nhà”</div>
-          <div class="reason-text">Chỉ cần ở cạnh em, mọi thứ đều trở nên nhẹ hơn rất nhiều.</div>
+          <div class="reason-title" data-bind="rt5">Cảm giác như “nhà”</div>
+          <div class="reason-text" data-bind="r5">
+            Chỉ cần ở cạnh em, mọi thứ đều trở nên nhẹ hơn rất nhiều.
+          </div>
         </div>
         <div class="reason-card">
-          <div class="reason-title">Vì đó là em</div>
-          <div class="reason-text">Đơn giản là: vì em là em.</div>
+          <div class="reason-title" data-bind="rt6">Vì đó là em</div>
+          <div class="reason-text" data-bind="r6">
+            Đơn giản là: vì em là em.
+          </div>
         </div>
       </div>
     </div>
@@ -438,21 +449,21 @@
       <div class="timeline">
         <div class="timeline-item">
           <div class="timeline-dot"></div>
-          <div class="timeline-title">Khoảnh khắc 1</div>
+          <div class="timeline-title" data-bind="tlTitle1">Khoảnh khắc 1</div>
           <div class="timeline-text" data-bind="tl1">
             Ngày đầu chúng ta nói chuyện nhiều hơn, chỉ vài tin nhắn nhưng lại mở ra cả một hành trình dài.
           </div>
         </div>
         <div class="timeline-item">
           <div class="timeline-dot"></div>
-          <div class="timeline-title">Khoảnh khắc 2</div>
+          <div class="timeline-title" data-bind="tlTitle2">Khoảnh khắc 2</div>
           <div class="timeline-text" data-bind="tl2">
             Lần đầu gặp em ngoài đời, em còn đẹp hơn tất cả những gì anh tưởng tượng.
           </div>
         </div>
         <div class="timeline-item">
           <div class="timeline-dot"></div>
-          <div class="timeline-title">Khoảnh khắc 3</div>
+          <div class="timeline-title" data-bind="tlTitle3">Khoảnh khắc 3</div>
           <div class="timeline-text" data-bind="tl3">
             Ngày tụi mình chính thức là "chúng ta" – từ đó tương lai của anh luôn có hình bóng em.
           </div>
@@ -513,6 +524,10 @@
 
   // IMAGE (mainImg + g1..g6)
   document.querySelectorAll("[data-img]").forEach(el=>{
+    const musicUrl = params.get("musicFile");
+if (musicUrl) {
+  document.getElementById("musicSrc").src = musicUrl;
+}
     const key = el.dataset.img;
     const val = params.get(key);
     if(val && val.trim() !== ""){
@@ -588,4 +603,3 @@
 
 </body>
 </html>
-
