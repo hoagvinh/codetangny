@@ -354,22 +354,30 @@
       UPLOAD NHẠC → transfer.sh
   ============================= */
   async function uploadMusic(file) {
-    const allowed = ["audio/mpeg", "audio/mp3", "audio/m4a", "audio/wav"];
-    if (!allowed.includes(file.type)) {
-      throw new Error("Nhạc không hỗ trợ: " + file.type);
-    }
-
-    const res = await fetch("https://transfer.sh/" + encodeURIComponent(file.name), {
-      method: "PUT",
-      body: file
-    });
-
-    if (!res.ok) {
-      throw new Error("Upload nhạc thất bại (HTTP " + res.status + ")");
-    }
-
-    return (await res.text()).trim();
+  const allowed = ["audio/mpeg", "audio/mp3", "audio/wav", "audio/m4a"];
+  if (!allowed.includes(file.type)) {
+    throw new Error("Nhạc không hỗ trợ: " + file.type);
   }
+
+  const form = new FormData();
+  form.append("file", file);
+
+  const res = await fetch("https://api.mixdrop.ag/upload", {
+    method: "POST",
+    body: form
+  });
+
+  if (!res.ok) {
+    throw new Error("Upload nhạc thất bại (HTTP " + res.status + ")");
+  }
+
+  const data = await res.json();
+  if (!data || !data.result || !data.result.url) {
+    throw new Error("Không nhận được link nhạc từ mixdrop");
+  }
+
+  return data.result.url;
+}
 
 
   /* =============================
@@ -441,3 +449,4 @@
 
   updatePreview();
 </script>
+
